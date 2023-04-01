@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %} {% block title %} Dashboard {% endblock %}
+
+<!--  -->
+
+{% block content %}
+
+<div class="py-6 px-6">
+  <h1 class="text-xl mb-5 font-semibold">Dashboard</h1>
+  <div class="flex space-x-4">
+    <div class="leads px-4 py-6 bg-slate-200 rounded-xl w-1/2">
+      <h2 class="text-lg mb-4">Newest Tasks</h2>
+      {% for lead in leads %}
+      <div class="mb-2 lead">
+        <h3 class="font-semibold">{{lead.name}}</h3>
+        <p class="text-xs">Status:{{lead.get_status_display}}</p>
+        <p class="text-xs">Priority:{{lead.get_priority_display}}</p>
+        <a class="hover:text-sky-400" href=" {% url 'leads:details' lead.pk %} "
+          >Read more</a
+        >
+      </div>
+      {% endfor %}
+    </div>
+    <div class="clients px-4 py-6 bg-slate-200 rounded-xl w-1/2">
+      <h2 class="text-lg mb-4">Newest Task in Progress</h2>
+      {% for client in clients %}
+      <div class="mb-2 client">
+        <h3 class="font-semibold">{{client.name}}</h3>
+        <a
+          class="hover:text-sky-400"
+          href=" {% url 'clients:detail' client.pk %} "
+          >Read more</a
+        >
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
