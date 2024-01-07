@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %} {% block title %} Tasks {% endblock %}
+
+<!--  -->
+
+{% block content %}
+
+<div class="py-6 px-6">
+  <h1 class="mb-4 text-xl">Tasks</h1>
+  <a
+    href="{% url 'leads:add_lead' %}"
+    class="inline-block py-4 px-6 bg-blue-800 rounded-xl text-white"
+    >Add Task
+    <!--  -->
+  </a>
+
+  <div class="mt-6 flex justify-between">
+    <div class="py-4 px-2 bg-slate-300 font-semibold w-full">Name</div>
+    <div class="py-4 px-2 bg-slate-300 font-semibold w-full">Priorty</div>
+    <div class="py-4 px-2 bg-slate-300 font-semibold w-full">Status</div>
+  </div>
+
+  {% for lead in object_list %}
+  <div class="flex justify-between">
+    <p class="py-2 px-2 w-full">
+      <a href="{% url 'leads:details' lead.id %}"> {{ lead.name }} </a>
+    </p>
+    <p class="py-2 px-2 w-full">{{ lead.get_priority_display }}</p>
+    <p class="py-2 px-2 w-full">{{ lead.get_status_display }}</p>
+  </div>
+  {% empty %}
+  <p class="pt-5 px-2">There are no Task exist</p>
+  {% endfor %}
+</div>
+
+{% endblock %}

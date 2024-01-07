@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %} {% block title %} Edit-Task_in_progress
+<!--  -->
+{% endblock %}
+
+<!--  -->
+
+{% block content %}
+
+<div class="py-6 px-6">
+  <h1 class="text-xl">Edit Task in Progress</h1>
+  <form action="." method="post">
+    {% csrf_token %} {{form.as_p}}
+    <button class="py-4 px-8 bg-blue-500 text-white rounded-xl">Submit</button>
+  </form>
+</div>
+
+{% endblock %}

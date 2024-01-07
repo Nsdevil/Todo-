@@ -1,0 +1,253 @@
+{% extends 'core/base.html' %} {% load static %}
+<!--  -->
+{% block title %} Todo+ {% endblock %}
+
+<!--  -->
+
+{% block content %}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+/>
+<style>
+  @import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+  .body12 {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+    height: 100vh;
+    overflow-y: hidden;
+  }
+
+  .slider-container {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 95;
+  }
+
+  .left-slide {
+    height: 100%;
+    width: 35%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .left-slide > div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+
+  .left-slide h1 {
+    font-size: 40px;
+    margin-top: -30px;
+    margin-bottom: 10px;
+  }
+
+  .right-slide {
+    top: 0;
+    left: 35%;
+    height: 100%;
+    width: 65%;
+    position: absolute;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .right-slide > div {
+    position: center center;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .slider-container .action-button button {
+    background-color: #fff;
+    border: none;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 15px;
+    position: absolute;
+    left: 35%;
+    top: 50%;
+    z-index: 100;
+  }
+
+  .slider-container .action-button button:hover {
+    color: #222;
+  }
+  .slider-container .action-button button:focus {
+    outline: none;
+  }
+
+  .slider-container .action-button .down-button {
+    transform: translateX(-100%);
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  .slider-container .action-button .up-button {
+    transform: translateY(-100%);
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  .winter {
+    background-image: url("{% static 'winter_city.jpg' %}");
+  }
+  .wild_forest {
+    background-image: url("{% static 'wild_forest.jpg' %}");
+  }
+  .sunny_beach {
+    background-image: url("{% static 'sunny_beach.jpg' %}");
+  }
+  .exploring_world {
+    background-image: url("{% static 'exploring_world.jpg' %}");
+  }
+  .mountain_cloud {
+    background-image: url("{% static 'mountain_cloud.jpg' %}");
+  }
+  .egel {
+    background-image: url("{% static 'egel.jfif' %}");
+  }
+  .castle {
+    background-image: url("{% static 'castle.jfif' %}");
+  }
+  .Sky {
+    background-image: url("{% static 'Sky.jfif' %}");
+  }
+  .Flower {
+    background-image: url("{% static 'Flower.jfif' %}");
+  }
+</style>
+
+<div class="body12">
+  <div class="slider-container">
+    <div class="left-slide">
+      <div style="background-color: #fd3555">
+        <h1>
+          Subtracting from your list of priorities is as important as adding to
+          it
+        </h1>
+        <p>Frank Sonnenberg</p>
+      </div>
+
+      <div style="background-color: #2a86ba">
+        <h1>Each day I will accomplish one thing on my to do list</h1>
+        <p>Lailah Gifty Akita</p>
+      </div>
+
+      <div style="background-color: #252e33">
+        <h1>Life should not be reduced to a to do list</h1>
+        <p>Rasheed Ogunlaru</p>
+      </div>
+
+      <div style="background-color: #ffb866">
+        <h1>Forget your to-do list and create a to-be list</h1>
+        <p>Frank Sonnenberg</p>
+      </div>
+
+      <div style="background-color: #6d792f">
+        <h1>
+          We need to do a better job of putting ourselves higher on our own ‘to
+          do’ list
+        </h1>
+        <p>Michelle Obama</p>
+      </div>
+
+      <div style="background-color: #99acb4">
+        <h1>To-Do lists help us break life into small steps</h1>
+        <p>Randy Pausch</p>
+      </div>
+
+      <div style="background-color: #fe8c4b">
+        <h1>
+          Love a Monday morning “to-do” list, gets me so pumped up for the week
+          ahead
+        </h1>
+        <p>Patricia Bright</p>
+      </div>
+
+      <div style="background-color: #aba46a">
+        <h1>
+          Today is the day you’re going to slay your to-do list and bring home a
+          major win
+        </h1>
+        <p>Michael Hyatt</p>
+      </div>
+
+      <div style="background-color: #60342d">
+        <h1>I love lists. Always have</h1>
+        <p>Adam Savage</p>
+      </div>
+    </div>
+
+    <div class="right-slide">
+      <div class="exploring_world"></div>
+      <div class="wild_forest"></div>
+      <div class="sunny_beach"></div>
+      <div class="winter"></div>
+      <div class="mountain_cloud"></div>
+      <div class="egel"></div>
+      <div class="castle"></div>
+      <div class="Sky"></div>
+      <div class="Flower"></div>
+    </div>
+    <div class="action-button">
+      <button class="down-button">
+        <i class="fas fa-arrow-down"></i>
+      </button>
+      <button class="up-button">
+        <i class="fas fa-arrow-up"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const sliderContainer = document.querySelector(".slider-container");
+  const sliderRight = document.querySelector(".right-slide");
+  const sliderLeft = document.querySelector(".left-slide");
+  const upButton = document.querySelector(".up-button");
+  const downButton = document.querySelector(".down-button");
+  const slidesLength = sliderRight.querySelectorAll("div").length;
+
+  let activeSlideWindow = 0;
+
+  sliderLeft.style.top = `-${(slidesLength - 1) * 100}vh`;
+
+  upButton.addEventListener("click", () => changeSlide("up"));
+  downButton.addEventListener("click", () => changeSlide("down"));
+
+  const changeSlide = (direction) => {
+    const sliderHight = sliderContainer.clientHeight;
+    if (direction === "up") {
+      activeSlideWindow++;
+      if (activeSlideWindow > slidesLength - 1) {
+        activeSlideWindow = 0;
+      }
+    } else if (direction === "down") {
+      activeSlideWindow--;
+      if (activeSlideWindow < 0) {
+        activeSlideWindow = slidesLength - 1;
+      }
+    }
+
+    sliderRight.style.transform = `translateY(-${
+      activeSlideWindow * sliderHight
+    }px)`;
+    sliderLeft.style.transform = `translateY(${
+      activeSlideWindow * sliderHight
+    }px)`;
+  };
+</script>
+
+{% endblock %}

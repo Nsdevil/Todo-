@@ -1,0 +1,97 @@
+{% extends 'core/base.html' %} {% block title %} {{lead.name}} {% endblock %}
+
+<!--  -->
+
+{% block content %}
+
+<div class="py-6 px-6">
+  <h1 class="mb-4 text-xl">{{lead.name}}</h1>
+
+  {% if lead.description %}
+  <p class="font-semibold">Name</p>
+  <p class="mb-3">{{lead.description}}</p>
+  {% endif %}
+
+  <p class="font-semibold">Status</p>
+  <p class="mb-3">{{lead.get_status_display}}</p>
+
+  <p class="font-semibold">Priorty</p>
+  <p class="mb-3">{{lead.get_priority_display}}</p>
+
+  <p class="font-semibold">Created at</p>
+  <p class="mb-3">{{lead.created_at|date:'M-d-Y(D) H:i'}}</p>
+
+  <p class="font-semibold">Modified at</p>
+  <p class="mb-6">{{lead.modified_at|date:'M-d-Y(D) H:i'}}</p>
+
+  <hr class="my-4 bg-blue-700" />
+
+  <form
+    id="lead_delete_form"
+    method="POST"
+    action="{% url 'leads:delete' lead.id %}"
+  >
+    {% csrf_token %}
+  </form>
+
+  <a
+    href=" {% url 'leads:convert' lead.id %} "
+    class="py-2 px-4 rounded-xl text-white bg-blue-400"
+  >
+    Convert to Task in Progress</a
+  >
+  <a
+    href=" {% url 'leads:edit' lead.id %} "
+    class="py-2 px-4 rounded-xl text-white bg-blue-500"
+  >
+    Edit</a
+  >
+  <a
+    href="#"
+    onclick="document.getElementById('lead_delete_form').submit();"
+    class="py-2 px-4 rounded-xl text-white bg-red-500"
+  >
+    Delete</a
+  >
+  <hr class="my-4 bg-black-700" />
+
+  <h2 class="text-xl mb-6">Comments</h2>
+  <div class="space-y-4">
+    {% for comment in lead.comments.all %}
+    <div class="bg-slate-200 p-6 rounded-xl">
+      <p><strong>{{comment.created_by}}</strong>@{{comment.created_at}}</p>
+      {{comment.content}}
+    </div>
+    {% endfor %}
+  </div>
+  <form action=" {% url 'leads:add_comment' lead.id %} " method="post">
+    {% csrf_token %} {{form.as_p}}
+    <button class="py-2 px-4 rounded-xl text-white bg-blue-400">Submit</button>
+  </form>
+  <hr class="my-4 bg-black-700" />
+
+  <h2 class="text-xl mb-6">Files</h2>
+  <div class="space-y-4">
+    {% for file in lead.files.all %}
+    <div class="bg-slate-200 p-6 rounded-xl">
+      <p><strong>{{file.created_by}}</strong>@{{file.created_at}}</p>
+      {{file.file}}
+      <a href=" {{file.file.url}} " class="hover:text-sky-400">Download</a>
+    </div>
+    {% endfor %}
+  </div>
+  <form
+    action="{% url 'leads:add_file' lead.id %}"
+    enctype="multipart/form-data"
+    method="post"
+  >
+    {% csrf_token %} {{fileform.as_p}}
+    <button class="py-2 px-4 rounded-xl text-white bg-blue-400">Submit</button>
+  </form>
+  <hr class="my-4 bg-blue-700" />
+
+  <a href=" {% url 'leads:list' %} ">
+    <button class="py-2 px-4 rounded-xl text-white bg-blue-700">Back</button></a
+  >
+</div>
+{% endblock %}
